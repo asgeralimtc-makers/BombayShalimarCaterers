@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bombay Shalimar Caterers - Authentic Chicken Dum Biryani</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:wght@300;400;600;700&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #daa520;
+            --dark-gold: #b8860b;
+            --brown: #8b4513;
+            --dark-brown: #654321;
+            --cream: #f5f1e8;
+            --light-cream: #faf8f3;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: var(--cream);
+            color: #2c2416;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(44, 36, 22, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 0.8rem 5%;
+            background: rgba(44, 36, 22, 0.98);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--cream);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--gold);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(44, 36, 22, 0.5), rgba(139, 69, 19, 0.6)),
+                        url('https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=1600') center/cover;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(218, 165, 32, 0.1) 0%, transparent 70%);
+            animation: shimmer 8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+            animation: fadeInUp 1.5s ease-out;
+            max-width: 1000px;
+            padding: 2rem;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 6rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+            color: var(--gold);
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.7);
+            letter-spacing: 8px;
+            animation: goldGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes goldGlow {
+            from { 
+                text-shadow: 4px 4px 8px rgba(0,0,0,0.7), 0 0 40px rgba(218, 165, 32, 0.5);
+            }
+            to { 
+                text-shadow: 4px 4px 8px rgba(0,0,0,0.7), 0 0 60px rgba(218, 165, 32, 0.9), 0 0 80px rgba(218, 165, 32, 0.5);
+            }
+        }
+
+        .hero .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            color: var(--cream);
+            margin-bottom: 1rem;
+            letter-spacing: 12px;
+            text-transform: uppercase;
+            font-weight: 300;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-out 0.3s forwards;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            color: #f5deb3;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-out 0.6s forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease-out 0.9s forwards;
+        }
+
+        .btn {
+            padding: 1.3rem 3rem;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: width 0.6s, height 0.6s, top 0.6s, left 0.6s;
+        }
+
+        .btn:hover::before {
+            width: 350px;
+            height: 350px;
+            top: -175px;
+            left: -175px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--dark-gold) 100%);
+            color: #2c2416;
+            box-shadow: 0 8px 25px rgba(218, 165, 32, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(218, 165, 32, 0.6);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--brown) 0%, var(--dark-brown) 100%);
+            color: var(--cream);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(139, 69, 19, 0.6);
+        }
+
+        .btn-call {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            color: white;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-call:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        /* About Section */
+        .about-section {
+            padding: 8rem 5%;
+            background: var(--light-cream);
+            position: relative;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5rem;
+            color: var(--brown);
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .about-text p {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            color: #4a4a4a;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 15px 40px rgba(218, 165, 32, 0.3);
+        }
+
+        .feature-card h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--brown);
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .about-image {
+            position: relative;
+            height: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Divider */
+        .divider {
+            text-align: center;
+            padding: 3rem 0;
+            font-size: 2.5rem;
+            color: var(--gold);
+            opacity: 0.7;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Offer Section */
+        .offer-section {
+            padding: 8rem 5%;
+            background: linear-gradient(180deg, var(--cream) 0%, #ede4d3 100%);
+            position: relative;
+        }
+
+        .offer-banner {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, var(--brown) 0%, var(--dark-brown) 100%);
+            border-radius: 30px;
+            padding: 5rem 4rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 30px 80px rgba(139, 69, 19, 0.4);
+            border: 4px solid var(--gold);
+            overflow: hidden;
+        }
+
+        .offer-banner::before {
+            content: '';
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(218, 165, 32, 0.2), transparent);
+            border-radius: 50%;
+            animation: moveGlow 5s ease-in-out infinite;
+        }
+
+        @keyframes moveGlow {
+            0%, 100% { top: -50px; left: -50px; }
+            50% { top: calc(100% - 150px); left: calc(100% - 150px); }
+        }
+
+        .offer-badge {
+            display: inline-block;
+            background: var(--gold);
+            color: #2c2416;
+            padding: 0.8rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 2rem;
+            letter-spacing: 3px;
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        .offer-banner h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--gold);
+            font-weight: 900;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        .offer-banner p {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--cream);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 8rem 5%;
+            background: #2c2416;
+        }
+
+        .menu-section h2 {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--gold);
+            font-weight: 900;
+        }
+
+        .menu-subtitle {
+            text-align: center;
+            color: #f5deb3;
+            font-size: 1.3rem;
+            margin-bottom: 5rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .menu-items {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            gap: 3rem;
+        }
+
+        .menu-item {
+            background: rgba(245, 241, 232, 0.05);
+            padding: 2.5rem;
+            border-radius: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+        }
+
+        .menu-item:hover {
+            background: rgba(245, 241, 232, 0.1);
+            border-color: var(--gold);
+            transform: translateX(10px);
+        }
+
+        .menu-item-info h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item-info p {
+            color: #f5deb3;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .menu-item-price {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        /* Gallery Section */
+        .gallery-section {
+            padding: 8rem 5%;
+            background: var(--cream);
+        }
+
+        .gallery-section h2 {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--brown);
+            font-weight: 900;
+        }
+
+        .gallery-subtitle {
+            text-align: center;
+            color: var(--dark-brown);
+            font-size: 1.3rem;
+            margin-bottom: 5rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .gallery-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            cursor: pointer;
+            height: 400px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border: 3px solid var(--gold);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.95);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.2) rotate(3deg);
+            filter: brightness(1.1);
+        }
+
+        .gallery-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(45deg, rgba(218, 165, 32, 0.5), rgba(139, 69, 19, 0.5));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Reviews Section */
+        .reviews-section {
+            padding: 8rem 5%;
+            background: linear-gradient(180deg, #ede4d3 0%, var(--light-cream) 100%);
+        }
+
+        .reviews-section h2 {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--brown);
+            font-weight: 900;
+        }
+
+        .reviews-subtitle {
+            text-align: center;
+            color: var(--dark-brown);
+            font-size: 1.3rem;
+            margin-bottom: 5rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .reviews-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .review-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold);
+            box-shadow: 0 20px 60px rgba(218, 165, 32, 0.3);
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            font-weight: 700;
+        }
+
+        .review-info h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--brown);
+            margin-bottom: 0.3rem;
+        }
+
+        .review-stars {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+
+        .review-text {
+            color: #4a4a4a;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        .review-quote {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 4rem;
+            color: var(--gold);
+            opacity: 0.1;
+            font-family: 'Cinzel', serif;
+        }
+
+        /* Ticker Section */
+        .ticker-section {
+            background: var(--brown);
+            padding: 2rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .ticker-wrapper {
+            display: flex;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0 3rem;
+            white-space: nowrap;
+            color: var(--gold);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+
+        .ticker-item span {
+            font-size: 2rem;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 8rem 5%;
+            background: linear-gradient(180deg, var(--light-cream) 0%, var(--cream) 100%);
+        }
+
+        .contact-section h2 {
+            font-family: 'Cinzel', serif;
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            color: var(--brown);
+            font-weight: 900;
+        }
+
+        .contact-subtitle {
+            text-align: center;
+            color: var(--dark-brown);
+            font-size: 1.3rem;
+            margin-bottom: 5rem;
+            letter-spacing: 6px;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+
+        .contact-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 3.5rem;
+            border-radius: 25px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border: 3px solid var(--gold);
+        }
+
+        .contact-info h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: var(--brown);
+            font-weight: 700;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--light-cream);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateX(10px);
+            background: #f0ead8;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--gold);
+        }
+
+        .contact-text {
+            flex: 1;
+        }
+
+        .contact-text h4 {
+            font-size: 1.1rem;
+            color: var(--brown);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .contact-text p {
+            color: #4a4a4a;
+            font-size: 1.1rem;
+        }
+
+        .contact-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .map-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);
+            color: white;
+            padding: 1.5rem 2.5rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.4s ease;
+            letter-spacing: 1px;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(66, 133, 244, 0.3);
+        }
+
+        .map-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(66, 133, 244, 0.5);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-btn {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            text-decoration: none;
+            font-size: 1.8rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            flex: 1;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+        }
+
+        .instagram-btn {
+            background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+            color: white;
+        }
+
+        .social-btn:hover {
+            transform: translateY(-8px) rotate(360deg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: #2c2416;
+            padding: 5rem 5% 2rem;
+            color: var(--cream);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-about h3 {
+            font-family: 'Cinzel', serif;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        .footer-about p {
+            line-height: 1.8;
+            color: #d4c5b0;
+            font-size: 1.1rem;
+        }
+
+        .footer-section h4 {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5rem;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #d4c5b0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+            padding-left: 10px;
+        }
+
+        .footer-hours p {
+            color: #d4c5b0;
+            margin-bottom: 0.8rem;
+            font-size: 1.05rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(218, 165, 32, 0.3);
+            padding-top: 2rem;
+            text-align: center;
+            color: #d4c5b0;
+        }
+
+        /* Floating elements */
+        .float-element {
+            position: fixed;
+            animation: floating 5s ease-in-out infinite;
+            z-index: 1;
+            opacity: 0.06;
+            font-size: 5rem;
+        }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(180deg); }
+        }
+
+        .float-1 {
+            top: 15%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .float-2 {
+            top: 60%;
+            right: 5%;
+            animation-delay: 2s;
+        }
+
+        .float-3 {
+            bottom: 15%;
+            left: 10%;
+            animation-delay: 4s;
+        }
+
+        /* Scroll animation */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 3.5rem;
+                letter-spacing: 4px;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">BOMBAY SHALIMAR</div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#menu">Menu</a>
+                <a href="#gallery">Gallery</a>
+                <a href="#reviews">Reviews</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Floating decorative elements -->
+    <div class="float-element float-1">✦</div>
+    <div class="float-element float-2">❋</div>
+    <div class="float-element float-3">✦</div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>BOMBAY SHALIMAR</h1>
+            <div class="subtitle">Caterers</div>
+            <p>Authentic Chicken Dum Biryani • Dargan Road, Navsari, Gujarat</p>
+            <div class="cta-buttons">
+                <a href="tel:+919825576629" class="btn btn-call">
+                    📞 Call Now
+                </a>
+                <a href="https://wa.me/919825576629?text=I%20want%20to%20book%20a%20table%20for%20today" class="btn btn-primary" target="_blank">
+                    📅 Book Table
+                </a>
+                <a href="https://wa.me/919825576629" class="btn btn-secondary" target="_blank">
+                    💬 WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section fade-in" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Our Story</h2>
+                <p>Welcome to Bombay Shalimar Caterers, where tradition meets taste. For generations, we've been serving the most authentic Chicken Dum Biryani in Navsari, crafted with love and the finest ingredients.</p>
+                <p>Our biryani is slow-cooked to perfection using the traditional dum method, ensuring every grain of rice is infused with aromatic spices and tender chicken that melts in your mouth.</p>
+                <div class="about-features">
+                    <div class="feature-card">
+                        <div class="feature-icon">🍛</div>
+                        <h4>Authentic Recipe</h4>
+                        <p>Traditional Bombay-style biryani passed down through generations</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⭐</div>
+                        <h4>Premium Quality</h4>
+                        <p>Only the finest ingredients and fresh spices used daily</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h4>Fast Service</h4>
+                        <p>Quick delivery and efficient dine-in service</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💝</div>
+                        <h4>Made with Love</h4>
+                        <p>Every dish prepared with passion and care</p>
+                    </div>
+                </div>
+            </div>
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800" alt="Our Kitchen">
+            </div>
+        </div>
+    </section>
+
+    <div class="divider">✦ ❋ ✦</div>
+
+    <!-- Offer Section -->
+    <section class="offer-section fade-in">
+        <div class="offer-banner">
+            <span class="offer-badge">⏰ EXCLUSIVE LIMITED TIME OFFER</span>
+            <h2>Buy 2 Get 1 Free!</h2>
+            <p>Order any 2 Chicken Dum Biryani</p>
+            <p style="font-size: 2.5rem; font-weight: 700; margin-top: 1.5rem; color: var(--gold);">& Get 1 Absolutely FREE! 🎉</p>
+            <p style="margin-top: 1rem; font-size: 1.2rem;">Limited period offer - Don't miss out!</p>
+            <a href="https://wa.me/919825576629?text=I%20want%20to%20order%20Buy%202%20Get%201%20Free%20offer" class="btn btn-primary" style="margin-top: 2.5rem;" target="_blank">
+                Order Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section fade-in" id="menu">
+        <h2>Our Specialties</h2>
+        <div class="menu-subtitle">Delicacies that Define Us</div>
+        <div class="menu-items">
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <h3>Chicken Dum Biryani (Full)</h3>
+                    <p>Aromatic basmati rice layered with succulent chicken pieces, slow-cooked with authentic spices in the traditional dum style. Served with raita and curry.</p>
+                </div>
+                <div class="menu-item-price">₹299</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <h3>Chicken Dum Biryani (Half)</h3>
+                    <p>Perfect portion of our signature biryani with tender chicken, fragrant rice, and our secret blend of spices. Comes with raita.</p>
+                </div>
+                <div class="menu-item-price">₹179</div>
+            </div>
+            <div class="menu-item">
+                <div class="menu-item-info">
+                    <h3>Special Family Pack</h3>
+                    <p>Serves 4-5 people. Includes full biryani, extra raita, curry, and complimentary beverages. Perfect for family gatherings!</p>
+                </div>
+                <div class="menu-item-price">₹999</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider" style="background: #2c2416; color: var(--gold);">✦ ❋ ✦</div>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section fade-in" id="gallery">
+        <h2>Culinary Excellence</h2>
+        <div class="gallery-subtitle">A Visual Feast</div>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?w=800" alt="Chicken Dum Biryani">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1599043513900-ed6fe01d3833?w=800" alt="Biryani Close-up">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800" alt="Biryani with Raita">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1642821373181-696a54913e93?w=800" alt="Aromatic Biryani">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800" alt="Traditional Biryani">
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800" alt="Delicious Biryani">
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section fade-in" id="reviews">
+        <h2>Customer Love</h2>
+        <div class="reviews-subtitle">What Our Patrons Say</div>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-quote">"</div>
+                <div class="review-header">
+                    <div class="review-avatar">RK</div>
+                    <div class="review-info">
+                        <h4>Rajesh Kumar</h4>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="review-text">Best biryani I've had in Gujarat! The chicken is so tender and the rice is perfectly cooked. The spices are authentic and remind me of my grandmother's cooking. Highly recommended!</p>
+            </div>
+            <div class="review-card">
+                <div class="review-quote">"</div>
+                <div class="review-header">
+                    <div class="review-avatar">PM</div>
+                    <div class="review-info">
+                        <h4>Priya Mehta</h4>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="review-text">Absolutely amazing! The aroma itself is enough to make you hungry. Every bite is a burst of flavors. Shadab bhai maintains excellent quality and the service is always prompt.</p>
+            </div>
+            <div class="review-card">
+                <div class="review-quote">"</div>
+                <div class="review-header">
+                    <div class="review-avatar">AS</div>
+                    <div class="review-info">
+                        <h4>Arjun Shah</h4>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="review-text">This is THE place for authentic biryani in Navsari. The Buy 2 Get 1 offer is incredible value. Perfect for family dinners. The packaging is also great for takeout!</p>
+            </div>
+            <div class="review-card">
+                <div class="review-quote">"</div>
+                <div class="review-header">
+                    <div class="review-avatar">NS</div>
+                    <div class="review-info">
+                        <h4>Neha Sharma</h4>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="review-text">I'm not from Navsari but whenever I visit, I make sure to order from Bombay Shalimar. The biryani is consistently delicious and the portions are generous. Worth every rupee!</p>
+            </div>
+            <div class="review-card">
+                <div class="review-quote">"</div>
+                <div class="review-header">
+                    <div class="review-avatar">VP</div>
+                    <div class="review-info">
+                        <h4>Vikram Patel</h4>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="review-text">Exceptional taste and quality! The dum style cooking makes all the difference. You can taste the love and effort in every plate. This is authentic Bombay-style biryani at its finest!</p>
+            </div>
+            <div class="review-card">
+                <div class="review-quote">"</div>
+                <div class="review-header">
+                    <div class="review-avatar">SM</div>
+                    <div class="review-info">
+                        <h4>Sneha Modi</h4>
+                        <div class="review-stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+                <p class="review-text">My family's favorite spot for biryani! The spice level is perfect and the chicken is always fresh. Great ambiance and friendly staff. Will definitely keep coming back!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ticker Section -->
+    <div class="ticker-section">
+        <div class="ticker-wrapper">
+            <div class="ticker-item">
+                <span>🔥</span> LIMITED OFFER: BUY 2 GET 1 FREE
+            </div>
+            <div class="ticker-item">
+                <span>✨</span> AUTHENTIC DUM BIRYANI
+            </div>
+            <div class="ticker-item">
+                <span>⭐</span> 5-STAR RATED
+            </div>
+            <div class="ticker-item">
+                <span>🚀</span> FAST DELIVERY
+            </div>
+            <div class="ticker-item">
+                <span>🔥</span> LIMITED OFFER: BUY 2 GET 1 FREE
+            </div>
+            <div class="ticker-item">
+                <span>✨</span> AUTHENTIC DUM BIRYANI
+            </div>
+            <div class="ticker-item">
+                <span>⭐</span> 5-STAR RATED
+            </div>
+            <div class="ticker-item">
+                <span>🚀</span> FAST DELIVERY
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section fade-in" id="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-subtitle">We're Here to Serve</div>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="contact-item">
+                    <div class="contact-icon">👤</div>
+                    <div class="contact-text">
+                        <h4>Owner</h4>
+                        <p>Shadab Shaikh</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-text">
+                        <h4>Phone</h4>
+                        <p>+91 98255 76629</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <div class="contact-text">
+                        <h4>Address</h4>
+                        <p>Dargan Road, Navsari, Gujarat</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">⏰</div>
+                    <div class="contact-text">
+                        <h4>Open Hours</h4>
+                        <p>11:00 AM - 11:00 PM (Daily)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-buttons">
+                <a href="tel:+919825576629" class="btn btn-call" style="width: 100%; justify-content: center;">
+                    📞 Call Now
+                </a>
+                <a href="https://wa.me/919825576629?text=I%20want%20to%20book%20a%20table%20for%20today" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                    📅 Book Table
+                </a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Dargan+Road+Navsari+Gujarat" class="map-btn" target="_blank">
+                    📍 View on Google Maps
+                </a>
+                <div class="social-links">
+                    <a href="https://wa.me/919825576629" class="social-btn whatsapp-btn" target="_blank" title="WhatsApp">
+                        <span>💬</span>
+                    </a>
+                    <a href="https://instagram.com" class="social-btn instagram-btn" target="_blank" title="Instagram">
+                        <span>📷</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-about">
+                <h3>BOMBAY SHALIMAR</h3>
+                <p>Experience the authentic taste of Bombay-style Chicken Dum Biryani in the heart of Navsari. We take pride in serving traditional recipes with the finest ingredients, ensuring every bite is a celebration of flavors.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#home">→ Home</a></li>
+                    <li><a href="#about">→ About Us</a></li>
+                    <li><a href="#menu">→ Menu</a></li>
+                    <li><a href="#gallery">→ Gallery</a></li>
+                    <li><a href="#reviews">→ Reviews</a></li>
+                    <li><a href="#contact">→ Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Services</h4>
+                <ul class="footer-links">
+                    <li><a href="#">→ Dine-In</a></li>
+                    <li><a href="#">→ Takeaway</a></li>
+                    <li><a href="#">→ Home Delivery</a></li>
+                    <li><a href="#">→ Catering</a></li>
+                    <li><a href="#">→ Party Orders</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Opening Hours</h4>
+                <div class="footer-hours">
+                    <p>Monday - Sunday</p>
+                    <p><strong>11:00 AM - 11:00 PM</strong></p>
+                    <p style="margin-top: 1rem; color: var(--gold);">We're open every day!</p>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Bombay Shalimar Caterers. All Rights Reserved.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.95rem;">Crafted with ❤️ for biryani lovers</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
